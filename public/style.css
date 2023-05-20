@@ -1,0 +1,86 @@
+/* elements */
+body {
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  margin: 0 8 0 0;
+  font-family: cantarell;
+}
+
+h1 {
+  color: black;
+  margin: 16 0 0 8;
+}
+
+/* classes */
+.horizontal-container {
+  display: flex;
+  flex-flow: row;
+}
+
+.vertical-container {
+  display: flex;
+  flex-flow: column;
+}
+
+.fill-flex {
+  flex: 1;
+}
+
+.contents {
+  overflow: unset;
+}
+
+.content {
+  margin: 16;
+  padding: 16 8 8 32;
+  background: #FFCCCC;
+  width: 30em;
+  border-bottom-right-radius: 32px;
+}
+
+.content.fill {
+  height: -webkit-fill-available;
+}
+
+.content.fixed {
+  height: 30%;
+}
+
+.contet.fit {
+  height: fit-content;
+}
+
+/* IDs */
+#middle {
+  padding: 16 0 16 0;
+}
+
+#selector {
+  padding: 20 8 0 8;
+  margin: 0 0 0 10;
+  background: #6d0606;
+  border-radius: 0px 5px 5px 0px;
+}
+
+#selector a {
+  color: white;
+  padding: 8 10 8 5;
+  margin:  2 0 2 0;
+
+  border-radius: 0 0 2px 0;
+  border-style: solid;
+  border-width: 0;
+  border-color: white;
+
+  text-decoration: none;
+  font-size: large;
+}
+
+#selector a:hover {
+  padding: 8 5 6 2;
+  margin:  2 3 2 3;
+
+  border-width: 0 2 2 0;
+}

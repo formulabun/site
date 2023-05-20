@@ -1,0 +1,22 @@
+<html>
+  <head>
+    <title> Formula Bun </title>
+    <link rel="stylesheet", href="./public/style.css"/>
+  </head>
+  <body class="vertical-container">
+    <h1 class=""> Formula Bun </h1>
+    <div id="middle" class="horizontal-container fill-flex">
+      <div id="selector" class="vertical-container">
+        <a href="/about"> about </a>
+        <!-- TODO a href="/maps"> maps </a>
+        <a href="/mods"> mods </a>
+        <a href="/chars"> chars </a-->
+      </div>
+
+      <div id="contents" class="horizontal-container fill-flex">
+        {{block "content" .}} Something went wrong {{end}}
+      </div>
+
+    </div>
+  </body>
+</html>
