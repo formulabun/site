@@ -9,7 +9,7 @@ COPY . .
 ENV CGO_ENABLED=0
 RUN go get -d -v ./...
 
-RUN go build -a -installsuffix cgo -o site .
+RUN go build -buildvcs=false -a -installsuffix cgo -o site .
 
 FROM busybox AS runtime
 WORKDIR /go/app
