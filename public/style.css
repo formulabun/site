@@ -52,6 +52,15 @@ h1 {
   height: fit-content;
 }
 
+.spectator {
+  color: gray;
+}
+
+.scroll-content {
+  overflow: scroll;
+  max-height: 75vh;
+}
+
 /* IDs */
 #middle {
   padding: 16 0 16 0;

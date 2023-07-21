@@ -8,9 +8,7 @@
     <div id="middle" class="horizontal-container fill-flex">
       <div id="selector" class="vertical-container">
         <a href="/about"> about </a>
-        <!-- TODO a href="/maps"> maps </a>
-        <a href="/mods"> mods </a>
-        <a href="/chars"> chars </a-->
+        {{if or .ServerInfo .Players .Maps .Characters .Mods .Other }} <a href="/files"> files </a> {{end}}
       </div>
 
       <div id="contents" class="horizontal-container fill-flex">
