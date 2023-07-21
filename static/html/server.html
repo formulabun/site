@@ -1,0 +1,81 @@
+<html>
+  <head>
+    <title> Formula Bun </title>
+    <link rel="stylesheet", href="./public/style.css"/>
+    <script src="https://unpkg.com/htmx.org@1.9.3"></script>
+  </head>
+  <body class="vertical-container">
+    <h1 class=""> Formula Bun </h1>
+    <div id="middle" class="horizontal-container fill-flex">
+      <div id="selector" class="vertical-container">
+        <a href="./index.html"> about </a>
+        <a href="./server.html"> server </a>
+      </div>
+
+      <div id="contents" class="horizontal-container fill-flex">
+        <div id="contents" class="horizontal-container fill-flex">
+          <div class="vertical-container">
+            <div
+              class="content"
+              hx-get="/api/players"
+              hx-swap="innerHTML"
+              hx-trigger="load, every 1s">
+              loading...
+            </div>
+            <div
+              class="content"
+              hx-get="/api/server"
+              hx-swap="innerHTML"
+              hx-trigger="load, every 1s"
+              >
+              loading...
+            </div>
+          </div>
+          <div class="vertical-container">
+            <div
+              class="content"
+              hx-get="/api/files/maps"
+              hx-swap="beforeend"
+              hx-trigger="load"
+              >
+              <h3> Maps </h3>
+            </div>
+          </div>
+          <div class="verical-container">
+            <div
+              class="content"
+              hx-get="/api/files/chars"
+              hx-swap="beforeend"
+              hx-trigger="load"
+              >
+              <h3> Characters </h3>
+            </div>
+          </div>
+
+          <div class="vertical-container">
+            <div
+              class="content"
+              hx-get="/api/files/mods"
+              hx-swap="beforeend"
+              hx-trigger="load"
+              >
+              <h3> Mods </h3>
+
+            </div>
+            <div
+              class="content"
+              hx-get="/api/files/other"
+              hx-swap="beforeend"
+              hx-trigger="load"
+              >
+              <h3> Others </h3>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </body>
+</html>

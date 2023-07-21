@@ -1,0 +1,10 @@
+<h2> There are currently {{ if not . }} 0 {{else}} {{len . }} {{ end }}player(s) racing </h2>
+<table style="width: inherit">
+  {{ if . }}
+  {{ range . }}
+  <tr {{ if .IsSpectator }}class="spectator"{{ end }} >
+    <td> {{ .PlayerName }} </td> <td> {{ .Score }} </td>
+  </tr>
+  {{ end }}
+  {{ end }}
+</table>

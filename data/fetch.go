@@ -33,31 +33,35 @@ func updateData(d *SiteData, ctx context.Context) {
 
 func updateServer(d *SiteData, ctx context.Context) {
 	l := log.New(os.Stdout, "server: ", log.LstdFlags)
-	for range initTick(time.Second * 5) {
-		cctx, _ := context.WithTimeout(ctx, time.Second*5)
+	for range initTick(time.Second) {
+		cctx, _ := context.WithTimeout(ctx, time.Second)
 		req := c.DefaultApi.ServerinfoGet(cctx)
 		info, _, err := req.Execute()
 		if err != nil {
-			d.ServerInfo = nil
 			l.Print(err)
+			continue
+		}
+		if info == nil || !info.HasLevelTime() {
 			continue
 		}
 		d.ServerInfo = &ServerInfo{
 			info.MapTitle,
-			fmt.Sprintf("%s", conversion.FramesToTime(uint(*info.LevelTime)).Round(time.Second/100)),
+			fmt.Sprintf("%s", conversion.FramesToTime(uint(*info.LevelTime)).Round(time.Second)),
 		}
 	}
 }
 
 func updatePlayers(d *SiteData, ctx context.Context) {
 	l := log.New(os.Stdout, "players: ", log.LstdFlags)
-	for range initTick(time.Second * 5) {
-		cctx, _ := context.WithTimeout(ctx, time.Second*5)
+	for range initTick(time.Second) {
+		cctx, _ := context.WithTimeout(ctx, time.Second*10)
 		req := c.DefaultApi.PlayerinfoGet(cctx)
 		players, _, err := req.Execute()
 		if err != nil {
-			d.Players = nil
 			l.Print(err)
+			continue
+		}
+		if players == nil {
 			continue
 		}
 		d.Players = array.Map(players,

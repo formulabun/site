@@ -1,39 +1,24 @@
 package main
 
 import (
-	"context"
-	"html/template"
-	"log"
 	"net/http"
-	"os"
 
-	"go.formulabun.club/site/data"
-	"go.formulabun.club/site/handlers"
+	"github.com/gorilla/mux"
+	"go.formulabun.club/site/api"
 )
 
 func main() {
-	ctx, cancel := context.WithCancel(context.Background())
-	d := data.Init(ctx)
+	r := mux.NewRouter()
 
-	http.Handle("/", http.RedirectHandler("/about", http.StatusFound))
-	http.Handle("/public/", http.FileServer(http.Dir(".")))
+	// Order of matchers is important!
+	assetHandler := http.FileServer(http.Dir("static/"))
+	r.PathPrefix("/public/").Handler(assetHandler)
 
-	fs := os.DirFS("templates/")
-	baseTemplate := template.Must(template.ParseFS(fs, "base.tmpl"))
+	apiR := r.PathPrefix("/api").Subrouter()
+	api.Route(apiR)
 
-	about := handlers.AboutHandler{
-		template.Must(template.Must(baseTemplate.Clone()).ParseFS(fs, "about.tmpl")),
-		d,
-	}
-	http.Handle("/about", about)
+	htmlHandler := http.FileServer(http.Dir("static/html/"))
+	r.PathPrefix("/").Handler(htmlHandler)
 
-	maps := handlers.ServerHandler{
-		template.Must(template.Must(baseTemplate.Clone()).ParseFS(fs, "files.tmpl")),
-		d,
-	}
-	http.Handle("/files", maps)
-
-	log.Println("serving on port 8080")
-	log.Fatal(http.ListenAndServe(":8080", nil))
-	cancel()
+	http.ListenAndServe(":8080", r)
 }
