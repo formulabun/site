@@ -2,7 +2,6 @@ package api
 
 import (
 	"context"
-	"net/http"
 	"text/template"
 
 	"github.com/gorilla/mux"
@@ -15,7 +14,6 @@ type ApiHandler struct {
 
 func Route(r *mux.Router) {
 	d := data.Init(context.Background())
-	r.Handle("", &ApiHandler{d})
 
 	playersTmpl := template.Must(template.ParseFiles("templates/players.tmpl"))
 	r.Handle("/players", newPlayerHandler(playersTmpl, &d.Players))
@@ -28,8 +26,4 @@ func Route(r *mux.Router) {
 	r.Handle("/files/chars", newFilesHandler(tmpl, &d.Characters))
 	r.Handle("/files/mods", newFilesHandler(tmpl, &d.Mods))
 	r.Handle("/files/other", newFilesHandler(tmpl, &d.Other))
-}
-
-func (a *ApiHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("TODO\n"))
 }
