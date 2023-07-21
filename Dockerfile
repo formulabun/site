@@ -1,4 +1,4 @@
-FROM golang:1.18 AS build
+FROM golang:1.20 AS build
 WORKDIR /go/src
 
 COPY go.mod ./
@@ -15,7 +15,7 @@ FROM busybox AS runtime
 WORKDIR /go/app
 
 COPY --from=build /go/src/site .
-COPY --from=build /go/src/public ./public
+COPY --from=build /go/src/static ./static
 COPY --from=build /go/src/templates ./templates
 EXPOSE 8080/tcp
 ENTRYPOINT ["./site"]
